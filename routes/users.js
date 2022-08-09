@@ -1,8 +1,11 @@
-const express = require("express");
-const uid2 = require("uid2");
+const express = require("express")
+const uid2 = require("uid2")
+const SHA256 = require("crypto-js/sha256")
+const encBase64 = require("crypto-js/enc-base64")
 const router = express.Router();
 
-const User = require("../models/User")
+const User = require("../models/User");
+const { builtinModules } = require("module");
 
 router.post("/user/signup", async (req, res) => {
     try {
@@ -37,3 +40,5 @@ router.post("/user/signup", async (req, res) => {
         res.status(400).json({ error: error.message })
     }
 })
+
+module.exports = router

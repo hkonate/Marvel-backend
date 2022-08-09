@@ -2,9 +2,6 @@ require('dotenv').config();
 const axios = require('axios');
 const express = require('express')
 const cors = require('cors');
-const uid2 = require("uid2")
-const SHA256 = require("crypto-js/sha256")
-const encBase64 = require("crypto-js/enc-base64")
 const app = express()
 const cloudinary = require("cloudinary").v2;
 app.use(cors())
@@ -23,6 +20,9 @@ cloudinary.config({
 
 const favorisRoutes = require("./routes/favoris")
 app.use(favorisRoutes)
+
+const usersRoutes = require("./routes/users")
+app.use(usersRoutes)
 
 app.get("/", (req, res) => {
     try {
