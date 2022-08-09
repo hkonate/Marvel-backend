@@ -13,7 +13,7 @@ router.post("/user/signup", async (req, res) => {
 
         if (email && username && password) {
             const doesEmailMatch = await User.findOne({ email: email })
-            if (doesEmailMatch === -1) {
+            if (!doesEmailMatch) {
                 const salt = uid2(16)
                 const hash = SHA256(password + salt).toString(encBase64)
                 const token = uid2(16)
