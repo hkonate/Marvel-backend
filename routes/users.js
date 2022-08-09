@@ -12,7 +12,8 @@ router.post("/user/signup", async (req, res) => {
         const { email, username, password } = req.body
 
         if (email && username && password) {
-            if (await User.findOne({ email: email }) === -1) {
+            const doesEmailMatch = await User.findOne({ email: email })
+            if (doesEmailMatch === -1) {
                 const salt = uid2(16)
                 const hash = SHA256(password + salt).toString(encBase64)
                 const token = uid2(16)
@@ -31,6 +32,7 @@ router.post("/user/signup", async (req, res) => {
                     token: newUser.token,
                 })
             } else {
+                console.log("ok");
                 res.status(409).json({ message: "email does already exist" })
             }
         } else {
