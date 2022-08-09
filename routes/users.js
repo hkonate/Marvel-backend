@@ -43,4 +43,33 @@ router.post("/user/signup", async (req, res) => {
     }
 })
 
+router.post("/user/login", async (req, res) => {
+    try {
+        const { password, email } = req.body
+        if (password && email) {
+            const user = await User.findOne({ email: email })
+            if (user) {
+                const hash = SHA256(password + user.salt).toString(encBase64);
+                if (hash = user.hash) {
+                    res.status(200).json({
+                        _id: user._id,
+                        username: user.username,
+                        email: user.email,
+                        token: user.token,
+                    })
+                } else {
+                    res.status(401).json({ error: "Unauthorized" })
+                }
+            } else {
+                res.status(400).json({ message: "User not found" })
+            }
+        } else {
+            res.status(406).json({ message: "Missing informations" })
+        }
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+
+})
+
 module.exports = router
