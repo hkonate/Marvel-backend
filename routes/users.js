@@ -50,7 +50,7 @@ router.post("/user/login", async (req, res) => {
             const user = await User.findOne({ email: email })
             if (user) {
                 const hash = SHA256(password + user.salt).toString(encBase64);
-                if (hash = user.hash) {
+                if (hash === user.hash) {
                     res.status(200).json({
                         _id: user._id,
                         username: user.username,
