@@ -14,7 +14,7 @@ app.use(favorisRoutes);
 
 const usersRoutes = require("./routes/users");
 app.use(usersRoutes);
-
+const test = process.env.PORT || 3338;
 app.get("/", (req, res) => {
   try {
     res.status(200).json({ message: "Welcome to the Marvel api !" });
@@ -68,6 +68,6 @@ app.get("*", (req, res) => {
   res.status(404).json({ message: "This route doesn't exist" });
 });
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log("Server live!!!!");
+app.listen(test, () => {
+  console.log("Server live!!!!", test);
 });
