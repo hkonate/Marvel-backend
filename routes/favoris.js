@@ -7,7 +7,7 @@ router.post("/favoris/create", async (req, res) => {
   try {
     if (!req.body.description) {
       const { name, url_secure, code } = req.body;
-
+      let userFavoris;
       if (name && url_secure && code) {
         const newFavoris = new Favoris({
           name: name,
@@ -15,11 +15,13 @@ router.post("/favoris/create", async (req, res) => {
           code: code,
         });
         await newFavoris.save();
+        userFavoris = await Favoris.find();
         res.status(200).json({
           name: newFavoris.name,
           url_secure: newFavoris.url_secure,
           code: newFavoris.code,
           _id: newFavoris._id,
+          userFavoris,
         });
       }
     } else if (req.body.description) {
@@ -31,14 +33,17 @@ router.post("/favoris/create", async (req, res) => {
           url_secure: url_secure,
           description: description,
           code: code,
+          userFavoris,
         });
         await newFavoris.save();
+        userFavoris = await Favoris.find();
         res.status(200).json({
           name: newFavoris.name,
           description: newFavoris.description,
           url_secure: newFavoris.url_secure,
           code: newFavoris.code,
           _id: newFavoris._id,
+          userFavoris,
         });
       }
     } else {
