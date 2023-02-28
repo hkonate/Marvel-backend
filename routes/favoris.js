@@ -21,7 +21,7 @@ router.post("/favoris/create", async (req, res) => {
           url_secure: newFavoris.url_secure,
           code: newFavoris.code,
           _id: newFavoris._id,
-          userFavoris,
+          userFavoris: userFavoris && userFavoris,
         });
       }
     } else if (req.body.description) {
@@ -33,7 +33,6 @@ router.post("/favoris/create", async (req, res) => {
           url_secure: url_secure,
           description: description,
           code: code,
-          userFavoris,
         });
         await newFavoris.save();
         userFavoris = await Favoris.find();
@@ -43,7 +42,7 @@ router.post("/favoris/create", async (req, res) => {
           url_secure: newFavoris.url_secure,
           code: newFavoris.code,
           _id: newFavoris._id,
-          userFavoris,
+          userFavoris: userFavoris && userFavoris,
         });
       }
     } else {
