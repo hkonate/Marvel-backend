@@ -66,7 +66,8 @@ router.delete("/favoris/delete/:id", async (req, res) => {
   try {
     if (req.params.id) {
       await Favoris.findByIdAndDelete(req.params.id);
-      res.status(200).json({ message: "Favoris removed" });
+      const userFavoris = await Favoris.find();
+      res.status(200).json({ userFavoris });
     } else {
       res.status(406).json({ message: "Misssing ID" });
     }
