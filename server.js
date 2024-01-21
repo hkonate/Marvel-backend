@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
+mongoose.set("strictQuery", false)
 
 app.use(cors());
 app.use(express.json());
@@ -15,7 +16,7 @@ app.use(favorisRoutes);
 
 const usersRoutes = require("./routes/users");
 app.use(usersRoutes);
-
+s
 app.get("/", (req, res) => {
   try {
     res.status(200).json({ message: "Welcome to the Marvel api !" });
