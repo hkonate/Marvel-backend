@@ -16,7 +16,7 @@ app.use(favorisRoutes);
 
 const usersRoutes = require("./routes/users");
 app.use(usersRoutes);
-s
+
 app.get("/", (req, res) => {
   try {
     res.status(200).json({ message: "Welcome to the Marvel api !" });
