@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
-
+mongoose.set("strictQuery", true);
 
 app.use(cors());
 app.use(express.json());
@@ -62,6 +62,6 @@ app.get("*", (req, res) => {
   res.status(404).json({ message: "This route doesn't exist" });
 });
 
-app.listen(process.env.PORT || 3338, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server live!!!!");
 });
